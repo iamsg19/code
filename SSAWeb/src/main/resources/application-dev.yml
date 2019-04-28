@@ -1,0 +1,9 @@
+#Server Details
+server:
+  port: 1010
+  
+#Application Properties
+ssa:
+  ssaProps:
+    enrollSuccess:  SSN Enrollment Successfull and your SSN ID is- 
+    enrollFailure:  SSN Enrollment Failure!!!

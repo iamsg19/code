@@ -58,7 +58,6 @@ public class SsaController {
 		
 		try 
 		{
-			int i=1/0;
 			//returing id is saved in id
 			Long id=ssaService.saveSsn(ssaModel);
 			

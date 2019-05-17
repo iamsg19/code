@@ -16,11 +16,23 @@
 	text-align:center;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<style type="text/css" ></style>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#ssnTable').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+} );
+</script>
+
 </head>
 <body>
 	<h3>Welcome</h3>
 	<div class="center">
-		<table border="2" class="table">
+		<table border="2" class="table" id="ssnTable">
 		<thead>
 			<tr>
 				<th>SSN No.</th>

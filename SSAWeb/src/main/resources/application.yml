@@ -3,23 +3,7 @@ spring:
   profiles:
     active:
     - dev
-      
-#Database Details
-  datasource:
-    url: jdbc:oracle:thin:@localhost:1521:ORCL
-    username: system
-    password: shiva7735
-    driver-class-name: oracle.jdbc.driver.OracleDriver
-
-#Hibernate Details
-  jpa:
-    properties:
-      hibernate:
-        dialect:  org.hibernate.dialect.OracleDialect
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
+    
 #View Resolver
   mvc:
     view:

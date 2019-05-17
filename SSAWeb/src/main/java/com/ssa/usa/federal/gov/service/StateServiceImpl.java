@@ -10,7 +10,7 @@ import com.ssa.usa.federal.gov.entity.StateListEntity;
 import com.ssa.usa.federal.gov.repository.StateListRepository;
 
 @Service
-public class StateServiceImpl implements StateService{
+public class StateServiceImpl implements StateRestService{
 
 	@Autowired
 	StateListRepository stateRepo;

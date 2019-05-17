@@ -27,4 +27,5 @@ public class StringConstants {
 	//Exception Constants
 	public static final String SAVE_ERROR="<center>Couldn't save, Something went wrong!!!<br> Please try later!!!</center>";
 	public static final String ERROR_MSG="errMsg";
+	public static final String PROVIDE_VALID_SSN="Provide valid SSN";
 }

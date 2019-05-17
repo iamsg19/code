@@ -41,8 +41,7 @@ public class SsaEntity {
 	private String lastName;
 	
 	@Column(name="DOB")
-	@DateTimeFormat(style="dd/MM/yyyy")
-	private String dob;
+	private Date dob;
 	
 	@Column(name="GENDER",length=6)
 	private String gender;

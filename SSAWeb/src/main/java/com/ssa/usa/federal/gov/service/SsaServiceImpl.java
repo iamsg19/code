@@ -1,30 +1,45 @@
 package com.ssa.usa.federal.gov.service;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.datetime.DateFormatter;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssa.usa.federal.gov.entity.SsaEntity;
 import com.ssa.usa.federal.gov.model.SsaModel;
 import com.ssa.usa.federal.gov.repository.SsaRepository;
+import com.ssa.usa.federal.gov.rest.controller.SsnRestController;
+import com.ssa.usa.federal.gov.rest.exception.StateNotFoundException;
 
+/**
+ * This is a service class 
+ * this class is used to provide different types of service methods
+ * 
+ * @author Shivaji Chandra
+ *
+ */
 @Service
 public class SsaServiceImpl implements SsaService{
+	
+	//Logger 
+	private static final Logger logger = LoggerFactory.getLogger(SsnRestController.class);
 	
 	@Autowired
 	private SsaRepository ssaRepository;
 	
 	/**
-	 * this method is for saving ssn objects.
+	 * This method is used to enroll the ssn details
+	 * 
+	 * @param	SsaModel ssaModel
+	 * @return	Long	ssn
 	 */
 	@Override
 	public Long saveSsn(SsaModel ssaModel){
@@ -77,6 +92,11 @@ public class SsaServiceImpl implements SsaService{
 
 	/**
 	 * this method is for retrieving all the records
+	 *
+	 *@param	no parameter
+	 *@return	List<SsaModel>
+	 *
+	 *
 	 */
 	@Override
 	public List<SsaModel> retrieveSsnData() {
@@ -103,7 +123,6 @@ public class SsaServiceImpl implements SsaService{
 				//copying single entity to the model
 				BeanUtils.copyProperties(entity, model);
 				model.setSsn(entity.getSsn().toString());
-				model.setDob(entity.getDob().substring(0,10));
 				//adding model to the
 				//list of ssaModel
 				ssaModel.add(model);
@@ -113,5 +132,42 @@ public class SsaServiceImpl implements SsaService{
 		return ssaModel;
 	}
 	
-	
+	/**
+	 * This method is for getting 
+	 * 	the state based on given ssn
+	 * 
+	 * @param	Long ssn
+	 * @return	SsaModel
+	 * 
+	 * if the given ssn will not be there in database then 
+	 * StateNotFoundException will throw
+	 */
+	public SsaModel findStateBySsn(Long ssn)
+	{
+		//Empty SsaModel
+		SsaModel ssaModel=new SsaModel();
+		
+		//Empty SsaEntity
+		SsaEntity ssaEntity=null;
+		
+		//finding state by ssn
+		Optional<SsaEntity> optionalEntity=ssaRepository.findById(ssn);
+		
+		//checking data is present or not
+		if(optionalEntity.isPresent())
+		{
+			//getting data from optionalEntity to SsaEntity
+			ssaEntity=optionalEntity.get();
+			
+			//copying data from ssaEntity to ssaModel
+			BeanUtils.copyProperties(ssaEntity, ssaModel);
+		}
+		else
+		{
+			//throwing the StateNotFoundException
+			//if ssn is invalid or optionalEntity is empty
+			throw new StateNotFoundException();
+		}
+		return ssaModel;
+	}
 }

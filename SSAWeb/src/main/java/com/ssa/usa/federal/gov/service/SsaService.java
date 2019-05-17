@@ -8,4 +8,5 @@ public interface SsaService {
 	
 	public Long saveSsn(SsaModel ssaModel);
 	public List<SsaModel> retrieveSsnData();
+	public SsaModel findStateBySsn(Long ssn);
 }

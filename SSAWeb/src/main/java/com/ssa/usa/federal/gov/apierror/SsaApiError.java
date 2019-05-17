@@ -1,4 +1,4 @@
-spackage com.ssa.usa.federal.gov.apierror;
+package com.ssa.usa.federal.gov.apierror;
 import java.util.Date;
 
 /**

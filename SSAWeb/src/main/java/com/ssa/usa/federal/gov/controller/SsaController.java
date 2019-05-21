@@ -145,10 +145,6 @@ public class SsaController{
 	public String showEnrolledData(Model model)
 	{
 		List<SsaModel> ssaModel=ssaService.retrieveSsnData();
-		HashMap m=new HashMap();
-		int s=m.size();
-		Hashtable t=new Hashtable();
-		int h=t.size();
 		
 		if(!ssaModel.isEmpty())
 		{

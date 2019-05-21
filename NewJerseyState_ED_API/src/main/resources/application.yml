@@ -1,0 +1,13 @@
+#Port Details
+server:
+  port: 2020
+  
+#Context Path
+  servlet:
+    context-path: /EdRulesApi
+    
+#Logging Details
+logging:
+  level:
+    root: INFO
+  file: E:\\Spring\\SpringBootProject\\EdRulesApi.log

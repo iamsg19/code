@@ -113,7 +113,7 @@ public class SsaServiceImpl implements SsaService{
 		if(!listEntity.isEmpty())
 		{
 			//retrieving single-single entity
-			//into entit from listEntity
+			//into entity from listEntity
 			for(SsaEntity entity:listEntity)
 			{
 				//creating empty model obj

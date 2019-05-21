@@ -1,0 +1,14 @@
+<h3 style="color:red">Hi, ${FIRST_NAME} ${LAST_NAME}</h3><br/>
+<h4 style="color:orange">
+Welcome to UHIP Application, Your account has been created and <br/>
+you can use following details to login,<br/>
+Application Url		:	${URL}<br/>
+Email 				:	${EMAIL}<br/>
+Password			: 	${PASSWORD}<br/>
+User Role			:	${ROLE}
+<br/><br/>
+If you face any type of problem then you can contact us at -<br/>
+Phone no. : ${PHONE_NO}<br/>
+<br/></h4>
+<h3 style="color:red">Thanks with Regards.<br/>
+UHIP Admin Team</h3>

@@ -1,0 +1,64 @@
+#Server Details
+server:
+  port: 2020
+   
+#Database Details
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:ORCL
+    username: uhipdev
+    password: uhipdev
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+#Hibernate Details
+  jpa:
+    properties:
+      hibernate:
+        dialect:  org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#Mail Properties
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: maharajainstitutes@gmail.com
+    password: shiva7735@
+    
+#Other properties
+    properties:
+      mail: 
+        smtp:
+          auth: true
+          connectiontimeout:  5000
+          
+#Enable TLS
+          starttls:
+            enable: true
+            
+#Logging details
+logging:
+  level:
+    root: error
+    org:
+      springframework:
+        web:  warn
+    com:
+      usa:
+        nj:
+          gov:  debug
+    
+  file: E:\\Spring\\SpringBoot Files\\UHIP.log
+  pattern:
+    dateformat: "%d{yyyy-MM-dd HH:mm:ss}"
+
+
+#Application Properties
+uhip: 
+  uhipProps:
+    loginSuccess:  Login Success 
+    loginFailure:  Invalid Credentials
+    success: User created successfully
+    failure:  User Creation failure
+    subject:  UHIP Account Creation
+    

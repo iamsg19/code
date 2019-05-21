@@ -1,0 +1,11 @@
+#Profiles activating
+spring:
+  profiles:
+    active:
+    - dev
+    
+#View Resolver
+  mvc:
+    view:
+      prefix: /views/
+      suffix: .jsp

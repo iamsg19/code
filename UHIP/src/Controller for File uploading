@@ -1,0 +1,74 @@
+@PostMapping(path = "/uploadFile", consumes = { "multipart/form-data" })
+	public ResponseEntity<?> uploadFileForUserEngagement(@RequestParam("userId") Integer userId,
+			@RequestParam("file") List<MultipartFile> files) throws Exception {
+
+		log.info("uploadFileForUserEngagement() method started");
+		Set<UserEngagementFile> userEngagementFiles = new HashSet<UserEngagementFile>();
+		UserEngagementDocs userEngagementDocs = new UserEngagementDocs();
+
+		if (userId > 0 && files != null) {
+			// checking user is registered or not
+			Optional<RocaUserRegistration> registeredUser = rocaUserRegistrationRepo.findById(userId);
+			if (registeredUser.isPresent()) {
+				// getting registered user details
+				RocaUserRegistration user = registeredUser.get();
+				// setting the registered userId to userEngagementDocs
+				userEngagementDocs.setUserId(user);
+				// iterating files for uploading
+				for (MultipartFile file : files) {
+					// method call for file uploading
+					uploadFileToBlobstore(file, user.getAzureMailId());
+					userEngagementFile.setUserEngagementDocs(userEngagementDocs);
+					userEngagementFiles.add(userEngagementFile);
+				}
+				userEngagementDocs.setUserEngagementFiles(userEngagementFiles);
+				;
+				try {
+					// saving userEngagementFile and savedUserEngagementDocs to DB
+
+					savedUserEngagementDocs = userEngagementDocsRepo.save(userEngagementDocs);
+				} catch (Exception e) {
+					log.error("Data not saved to db... Something went wrong" + e);
+					throw new Exception("Not able to save!!! Something went wrong" + e);
+				}
+				if (savedUserEngagementDocs != null) {
+					log.info("Data saved successfully into DB" + savedUserEngagementDocs);
+					return new ResponseEntity<>(savedUserEngagementDocs.getId(), HttpStatus.CREATED);
+				}
+			} else {
+				log.info("Invalid userId or Files");
+				return new ResponseEntity<>("No Files Found!!!", HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			log.info("User is not registered for the given userId" + userId);
+			return new ResponseEntity<>("User Not Registered", HttpStatus.PRECONDITION_FAILED);
+		}
+		return new ResponseEntity<>("Provide UserId", HttpStatus.BAD_REQUEST);
+	}
+
+	private void uploadFileToBlobstore(MultipartFile file, String azureMailId) throws Exception {
+
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		try {
+			userEngagementFile = new UserEngagementFile();
+
+			String emailId = azureMailId;
+
+			String userEmail = new String(Base64.encodeBase64(emailId.getBytes(), false, true, 63)).toLowerCase();
+			String url = azureService.blobStoreFile(file, userEmail);
+
+			int index1 = fileName.indexOf('.');
+			String docName = fileName.substring(0, index1);
+			String docExtention = fileName.substring(index1, fileName.length());
+
+			// setting meta data to UserEngagement entity
+			userEngagementFile.setFileName(docName);
+			userEngagementFile.setFileExtention(docExtention);
+			userEngagementFile.setUrl(url);
+			// userEngagementFile.setCreatedBy(createdBy);
+			userEngagementFile.setCreatedOn(new Timestamp(System.currentTimeMillis()));
+			// userEngagementFile.setUpdatedBy(updatedBy);
+		} catch (Exception ex) {
+			throw new Exception("Could not store file " + fileName + ". Please try again!", ex);
+		}
+	}

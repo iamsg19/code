@@ -9,14 +9,7 @@ public class InboxData {
 	private int messageNumber;
 	private String subject;
 	private List<MailAddress> from;
-	private MailAddress mailAddress;
 	
-	public MailAddress getMailAddress() {
-		return mailAddress;
-	}
-	public void setMailAddress(MailAddress mailAddress) {
-		this.mailAddress = mailAddress;
-	}
 	private String bodyContent;
 	public int getMessageNumber() {
 		return messageNumber;

@@ -3,11 +3,13 @@ package com.example.email;
 import java.util.List;
 
 import javax.mail.AuthenticationFailedException;
+import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.FolderNotFoundException;
 import javax.mail.Message;
 import javax.mail.NoSuchProviderException;
 import javax.mail.Store;
+import javax.mail.search.FlagTerm;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,9 +49,9 @@ public class EmailReading {
 		emailFolder.open(Folder.READ_ONLY);
 
 		// getting all the messages from the particular folder name
-		//Message[] messages = emailFolder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), true));
+		Message[] messages = emailFolder.search(new FlagTerm(new Flags(Flags.Flag.SEEN), true));
 		//Message[] messages = emailFolder.search(new FlagTerm(new Flags(Flags.Flag.USER), true));
-		Message[] messages = emailFolder.getMessages();
+		//Message[] messages = emailFolder.getMessages();
 		
 		// returning all the inbox data
 		return CommonCode.inboxData(messages);

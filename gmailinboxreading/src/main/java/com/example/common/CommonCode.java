@@ -1,5 +1,9 @@
 package com.example.common;
 
+import static com.example.constants.ProjectConstants.HOST;
+import static com.example.constants.ProjectConstants.MAIL_STORE_PROTOCOL;
+import static com.example.constants.ProjectConstants.PROTOCOL;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +18,6 @@ import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMultipart;
-
 
 /**
  * @author Shivaji Chandra
@@ -32,17 +35,15 @@ public class CommonCode {
 
 		// adding properties related to mail server
 		Properties properties = new Properties();
-		properties.setProperty("mail.store.protocol", "imaps");
+		properties.setProperty(MAIL_STORE_PROTOCOL, PROTOCOL);
 
 		// creating session for email
 		Session emailSession = Session.getDefaultInstance(properties);
 
 		// getting the email store from the specified protocol
-		Store emailStore = emailSession.getStore("imaps");
-
-		// connecting to email server by using host, username and password
-		emailStore.connect("imap.gmail.com", userName, password);
-
+		Store emailStore = null;
+		emailStore = emailSession.getStore(PROTOCOL);
+		emailStore.connect(HOST, userName, password);
 		return emailStore;
 	}
 
@@ -71,8 +72,7 @@ public class CommonCode {
 			}
 			inboxData.setFrom(mailAddressList);
 			inboxData.setBodyContent(getTextFromMessage(message));
-			
-			
+
 			inboxDataList.add(inboxData);
 		}
 
@@ -131,14 +131,6 @@ public class CommonCode {
 			throws MessagingException, IOException {
 
 		Address searchFrom = new InternetAddress(emailId);
-
-//		for (int i = messages.length-1; i > 0 ; i--) {
-//		    Message message = messages[i];
-//
-//		    
-//		        System.out.println("Subject : " + message.getSubject());
-//		    }
-//		}
 
 		List<InboxData> inboxDataList = new ArrayList<>();
 		for (int i = 0; i < messages.length; i++) {

@@ -1,5 +1,7 @@
 package com.example.exception;
 
+import javax.mail.AuthenticationFailedException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -24,7 +26,20 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		ExceptionMessage response = new ExceptionMessage();
 		response.setMessage(ex.getMessage());
-		response.setCountry(request.getLocale().getCountry());
+		response.setHttpStatus(HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	/**
+	 * @param ex
+	 * @param request
+	 * @return
+	 */
+	@ExceptionHandler(AuthenticationFailedException.class)
+	public ResponseEntity<ExceptionMessage> authFailedException(Exception ex, WebRequest request){
+		
+		ExceptionMessage response = new ExceptionMessage();
+		response.setMessage(ex.getMessage());
 		response.setHttpStatus(HttpStatus.BAD_REQUEST.value());
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}

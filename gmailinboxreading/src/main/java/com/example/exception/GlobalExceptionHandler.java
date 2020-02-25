@@ -43,4 +43,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		response.setHttpStatus(HttpStatus.BAD_REQUEST.value());
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}
+	
+	/**
+	 * @param ex
+	 * @param request
+	 * @return
+	 */
+	@ExceptionHandler(UserNameNotFoundException.class)
+	public ResponseEntity<ExceptionMessage> userNameNotFoundException(Exception ex, WebRequest request){
+		
+		ExceptionMessage response = new ExceptionMessage();
+		response.setMessage(ex.getMessage());
+		response.setHttpStatus(HttpStatus.BAD_REQUEST.value());
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
 }

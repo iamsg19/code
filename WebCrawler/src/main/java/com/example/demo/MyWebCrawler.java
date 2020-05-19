@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 import org.jsoup.Jsoup;
@@ -22,9 +23,23 @@ public class MyWebCrawler {
 			
 			//2. get all the articles in Elements
 			Elements elements = documents.getElementsByTag("article");
-			System.out.println(elements);
 			elements.forEach(element ->{
-				System.out.println(element);
+				Elements baseUrlElements = element.getElementsByTag("a");
+				String baseUrl = baseUrlElements.attr("href");
+				System.out.println(baseUrl);
+				try {
+					Document baseDoc = Jsoup.connect(baseUrl).get();
+					Elements baseElement = baseDoc.getElementsByTag("article");
+					
+					String fileName = baseUrl.replaceAll(".*/", "");
+					FileWriter fw = new FileWriter("D:\\Tutorials\\MyBlogs\\"+fileName);
+					fw.write(baseElement.html());
+					fw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 			});
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

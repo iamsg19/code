@@ -1,0 +1,7 @@
+com\example\service\StudentServiceImpl.class
+com\example\controller\StudentManagementController.class
+com\example\entity\Student.class
+com\example\CassandraCrudDemoAppApplication.class
+com\example\repository\StudentRepository.class
+com\example\model\StudentDTO.class
+com\example\service\StudentService.class

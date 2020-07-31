@@ -6,5 +6,5 @@ WORKDIR /build/
 RUN mvn package
 FROM openjdk:8-jre-alpine
 WORKDIR /app
-COPY --from=MAVEN_BUILD /build/target/cassandra-0.1.0.jar /app/
-ENTRYPOINT ["java", "-jar", "cassandra-0.1.0.jar"]
+COPY --from=MAVEN_BUILD /build/target/CassandraCRUDDemoApp-0.0.1-SNAPSHOT.jar /app/
+ENTRYPOINT ["java", "-jar", "CassandraCRUDDemoApp-0.0.1-SNAPSHOT.jar"]

@@ -8,4 +8,5 @@ import com.springsecurity.demo.model.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Serializable>{
 
+	
 }

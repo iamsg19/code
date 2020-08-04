@@ -9,6 +9,7 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		
 		return true;
+		
 	}
 
 }

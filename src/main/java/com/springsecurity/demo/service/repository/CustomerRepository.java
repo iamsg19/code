@@ -15,4 +15,5 @@ public interface CustomerRepository extends JpaRepository<Customer, Serializable
 
 	@Query(value = "select * from CM.Customer where approved='Recomended by Role3' or approved='Approved by Role4'", nativeQuery = true)
 	List<Customer> findDataForRole4();
+	
 }

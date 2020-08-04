@@ -13,7 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>PartnerLoginApplication</name>
 	<description>Partner login and reset password using Spring Security.</description>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

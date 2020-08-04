@@ -23,8 +23,6 @@ public class UserManagementService {
 		return "Successfully Created";
 	}
 
-	
-	
 	private void setApproval(Customer customer) {
 
 		if (customer.getInterestRate() > 14) {

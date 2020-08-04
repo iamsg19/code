@@ -40,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/api/final/data").hasAnyAuthority("Role4")
 				.and().formLogin().loginPage("/login").successHandler(successHandler).failureHandler(failureHandler)
 				.permitAll().and().exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+	
 	}
 
 	@Bean

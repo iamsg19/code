@@ -24,6 +24,7 @@ public class User {
 	@Column(name = "id")
 	private long id;
 	
+	
 	@Column(name = "emailId")
 	private String emailId;
 	

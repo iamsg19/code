@@ -30,6 +30,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 					redirectStrategy.sendRedirect(request, response, "/api/register");
 				} catch (Exception e) {
 
+					
 					e.printStackTrace();
 				}
 			} else if (authority.getAuthority().equals("Role2")) {

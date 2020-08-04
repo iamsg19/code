@@ -24,6 +24,7 @@ public class Customer {
 	@Column
 	private String approved;
 	public int getEnquiryId() {
+		
 		return enquiryId;
 	}
 	public void setEnquiryId(int enquiryId) {

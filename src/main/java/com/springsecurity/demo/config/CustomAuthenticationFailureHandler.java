@@ -30,6 +30,7 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 //	    data.put("status",HttpStatus.FORBIDDEN.value());
 //	    data.put("message", "Access Denied");
 //	    data.put("path", request.getRequestURL().toString());
+		
 	}
 
 }

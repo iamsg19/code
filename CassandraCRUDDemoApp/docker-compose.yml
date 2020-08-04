@@ -10,7 +10,7 @@ services:
   restart: always
   
  cassandradb:
-    image: cassabdra
+    image: cassandra
     container_name: cassandradb
     ports:
      - "9042-9042"

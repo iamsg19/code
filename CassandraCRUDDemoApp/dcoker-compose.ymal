@@ -1,0 +1,10 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      args:
+        JAR_FILE: /build/target/CassandraCRUDDemoApp-0.0.1-SNAPSHOT.jar
+    restart: always
+  cassandra:
+    image: "cassandra"

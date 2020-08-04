@@ -1,0 +1,16 @@
+<h3>Click here to Update  Student</h3>
+<div [hidden]="submitted" style="width: 400px;">
+    <form [formGroup]="studentupdateform" #savestudent (ngSubmit)="updateStudent(studentId)">
+    <div class="form-group">
+      <label for="name">Student Name</label>
+      <input type="text" class="form-control" formControlName="student_name" required [(ngModel)]="studentName" name="name">
+    </div>
+
+    <div class="form-group">
+      <label for="name">Student Age</label>
+      <input type="text" class="form-control" formControlName="student_age"  required [(ngModel)]="studentAge" name="age">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>

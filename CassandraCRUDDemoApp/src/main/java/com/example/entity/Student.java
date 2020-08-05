@@ -1,21 +1,17 @@
 package com.example.entity;
 
 import java.util.UUID;
-
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
-
-@Table(value = "Student")
+//
+//@Table(value = "Student")
 public class Student {
 
-	@PrimaryKey("stu_id")
+//	@PrimaryKey("stu_id")
 	private UUID stuId;
 	
-	@Column(value = "stu_name")
+//	@Column(value = "stu_name")
 	private String stuName;
 	
-	@Column(value = "stu_age")
+//	@Column(value = "stu_age")
 	private int stuAge;
 
 	

@@ -126,12 +126,17 @@ public class StudentManagementController {
 			if(student != null) {
 				return new ResponseEntity<>(student, HttpStatus.OK);
 			}else {
-				return new ResponseEntity<>("No Record found", HttpStatus.NO_CONTENT);
+				return new ResponseEntity<>("No Records found for UUID : "+uuid, HttpStatus.ACCEPTED);
 			}
 			
-		} catch (Exception e) {
+		} catch(IllegalArgumentException iae) {
+			
+			iae.printStackTrace();
+			return new ResponseEntity<>(iae.getMessage(), HttpStatus.NOT_ACCEPTABLE);
+		}
+		catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.EXPECTATION_FAILED);
 		}
 	}
 }

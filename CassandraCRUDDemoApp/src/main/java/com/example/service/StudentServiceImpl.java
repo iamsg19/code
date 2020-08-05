@@ -2,19 +2,23 @@ package com.example.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.datastax.oss.driver.api.core.uuid.Uuids;
 import com.example.entity.Student;
 import com.example.model.StudentDTO;
+import com.example.repository.StudentRepository;
 
 @Service
 public class StudentServiceImpl implements StudentService{
 
-//	@Autowired
-//	private StudentRepository studentRepository;
-//	
+	@Autowired
+	private StudentRepository studentRepository;
+	
 	/**
 	 *@implNote this method is used to create student in DB
 	 *return UUID
@@ -22,8 +26,7 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public Student saveStudent(StudentDTO studentDTO) throws Exception {
 		
-		//return studentRepository.save(new Student(studentDTO.getStuAge(), studentDTO.getStuName(), Uuids.timeBased()));
-		return new Student(24, "Shivaji", new UUID(0, 3297));
+		return studentRepository.save(new Student(studentDTO.getStuAge(), studentDTO.getStuName(), Uuids.timeBased()));
 	}
 
 	/**
@@ -35,17 +38,16 @@ public class StudentServiceImpl implements StudentService{
 	
 		List<StudentDTO> studentList = new ArrayList<>();
 		
-//		studentRepository.findAll().forEach(student -> {
-//			
-//			StudentDTO studentDTO = new StudentDTO();
-//			studentDTO.setStuId(student.getStuId().toString());
-//			studentDTO.setStuName(student.getStuName());
-//			studentDTO.setStuAge(student.getStuAge());
-//			
-//			studentList.add(studentDTO);
-//		});
+		studentRepository.findAll().forEach(student -> {
+			
+			StudentDTO studentDTO = new StudentDTO();
+			studentDTO.setStuId(student.getStuId().toString());
+			studentDTO.setStuName(student.getStuName());
+			studentDTO.setStuAge(student.getStuAge());
+			
+			studentList.add(studentDTO);
+		});
 		
-		studentList.add(new StudentDTO(24, "Shivaji", "sfjsljf"));
 		return studentList;
 
 	}
@@ -57,25 +59,24 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public boolean updateStudent(String uuid, StudentDTO student) throws Exception {
 
-//		boolean status = false;
-//
-//		Student studentData = studentById(UUID.fromString(uuid));
-//		
-//		if (studentData != null) {
-//			
-//			studentData.setStuName(student.getStuName());
-//			studentData.setStuAge(student.getStuAge());
-//			
-//			studentRepository.save(studentData);
-//			
-//			status = true;
-//			return status;
-//
-//		} else {
-//
-//			return status;
-//		}
-		return false;
+		boolean status = false;
+
+		Student studentData = studentById(UUID.fromString(uuid));
+		
+		if (studentData != null) {
+			
+			studentData.setStuName(student.getStuName());
+			studentData.setStuAge(student.getStuAge());
+			
+			studentRepository.save(studentData);
+			
+			status = true;
+			return status;
+
+		} else {
+
+			return status;
+		}
 	}
 	
 	/**
@@ -85,19 +86,18 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public boolean deleteStudent(UUID studentId) throws Exception {
 
-//		boolean status = false;
-//
-//		Student studentData = studentById(studentId);
-//		if (studentData != null) {
-//			studentRepository.delete(studentData);
-//			status = true;
-//			return status;
-//
-//		} else {
-//
-//			return status;
-//		}
-		return false;
+		boolean status = false;
+
+		Student studentData = studentById(studentId);
+		if (studentData != null) {
+			studentRepository.delete(studentData);
+			status = true;
+			return status;
+
+		} else {
+
+			return status;
+		}
 	}
 
 	/**
@@ -107,14 +107,13 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public Student studentById(UUID studentId)throws Exception {
 		
-//		Optional<Student> optionalStudent = studentRepository.findById(studentId);
-//		
-//		if(optionalStudent.isPresent()) {
-//			return optionalStudent.get();
-//		}else {
-//			return null;
-//		}
-		return new Student(24, "Shivaji", new UUID(0, 3297));
+		Optional<Student> optionalStudent = studentRepository.findById(studentId);
+		
+		if(optionalStudent.isPresent()) {
+			return optionalStudent.get();
+		}else {
+			return null;
+		}
 	}
 
 	

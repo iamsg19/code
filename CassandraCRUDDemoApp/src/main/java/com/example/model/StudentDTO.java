@@ -1,18 +1,10 @@
 package com.example.model;
 
-import java.util.UUID;
-
 public class StudentDTO {
 
 	private String stuId;
 	private String stuName;
 	private int stuAge;
-	public StudentDTO(int i, String string, String uuid) {
-		
-		this.stuAge = i;
-		this.stuId = "skfjsj";
-		this.stuName = "Shivaji";
-	}
 	public String getStuId() {
 		return stuId;
 	}

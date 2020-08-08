@@ -9,8 +9,8 @@ services:
         JAR_FILE: /build/target/CassandraCRUDDemoApp-0.0.1-SNAPSHOT.jar
     restart: always
   
-  cassandradb:
+  my-cassandra:
     image: cassandra
-    container_name: cassandradb
+    container_name: my-cassandra
     ports:
       - "9042-9042"

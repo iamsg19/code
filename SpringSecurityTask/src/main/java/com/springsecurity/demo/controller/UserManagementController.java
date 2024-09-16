@@ -43,6 +43,7 @@ public class UserManagementController {
 	 */
 	@GetMapping(value = "/authFailure")
 	public ModelAndView authFailure(ModelAndView modelAndView, User user) {
+		System.out.println("user"+user);
 		modelAndView.setViewName("authFailure");
 		return modelAndView;
 	}
